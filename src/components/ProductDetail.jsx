@@ -8,10 +8,10 @@ export const ProductDetail = () => {
   const { id } = useParams();
 
   const fetchData = useQuery({
-    queryKey: ["product", id], // id'yi query key'e dahil ediyoruz
+    queryKey: ["products", id], // id'yi query key'e dahil ediyoruz
     queryFn: async () =>
       await axios
-        .get(`https://jsonplaceholder.org/posts/${id}`) // id'ye göre veri çekiyoruz
+        .get(`https://fakestoreapi.com/products/${id}`) // id'ye göre veri çekiyoruz
         .then((res) => res.data),
     staleTime: Infinity,
   });
@@ -22,10 +22,14 @@ export const ProductDetail = () => {
   if (error) return "Hata..." + error.message;
 
   return (
-    <div>
-      <h1>Ürün Detay</h1>
-      <h2>{data.title}</h2>
-      <p>{data.image}</p> {/* Detayları burada göstereceğiz */}
+    <div className="text-center">
+      <h1 className="text-lg font-bold text-center ">Ürün Detay</h1>
+      <h2 className="text-center">{data.title}</h2>
+      <img
+        className="justify-center justify-items-center size-64"
+        src={data.image}
+      />
+      {/* Detayları burada göstereceğiz */}
     </div>
   );
 };

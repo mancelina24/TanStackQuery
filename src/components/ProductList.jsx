@@ -1,16 +1,15 @@
 import React from "react";
 import axios from "axios";
-
 import { useQuery } from "@tanstack/react-query";
 import { Product } from "./Product";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 
 const ProductList = () => {
   const fetchData = useQuery({
     queryKey: ["posts"],
     queryFn: async () =>
       await axios
-        .get("https://jsonplaceholder.org/posts")
+        .get("https://fakestoreapi.com/products")
         .then((res) => res.data),
     staleTime: Infinity,
   });
@@ -26,7 +25,7 @@ const ProductList = () => {
   };
   return (
     <div>
-      <h1>Ürünler</h1>
+      <h1 className="text-center">Ürünler</h1>
       {data?.map((dt, i) => (
         <Product
           key={i}
